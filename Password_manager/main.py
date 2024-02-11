@@ -1,3 +1,9 @@
+def view():
+    print("Accounts and Passwords:")
+    for account, password in psw_list.items():
+        print(f"User: {account} | Password: {password}")
+
+
 # Function to save passwords to file
 def save_passwords(passwords):
     with open("passwords.txt", "w") as file:
@@ -22,6 +28,19 @@ def load_passwords():
 # Load existing passwords from file
 psw_list = load_passwords()
 
+
+def is_3_let(s):
+    return any(char.isalpha() for char in s)
+
+
+def less_5_dig(s):
+    return len(s) < 5
+
+
+def less_12_dig(s):
+    return len(s) < 12
+
+
 while True:
     mode = input("Do you want to add, view, change or remove passwords?q to quit: ")
     if mode == "add":
@@ -35,14 +54,21 @@ while True:
         elif len(new_psw_account) > 12:
             print("Too many characters, use 12 or less")
             continue
+        elif not is_3_let(new_psw_account):
+            print("Account name must contain at least 3 letters")
+        elif not less_5_dig(new_psw_account):
+            print("Account name must contain less than 5 numbers")
+            continue
         new_psw = input("What is the password for the account?: ")
+        if not less_12_dig():
+            print("Invalid password, use less than 12 numbers")
         if not new_psw.isdigit():
             print("Invalid password, only use numbers")
             continue
         psw_list[new_psw_account] = new_psw
         save_passwords(psw_list)
     elif mode == "view":
-        print(psw_list)
+        view()
     elif mode == "change":
         change_psw_acc = input("Which account's password would you like to change: ")
         if change_psw_acc in psw_list:
