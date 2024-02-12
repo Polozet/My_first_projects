@@ -37,5 +37,5 @@ while True:
         L += 1
     play_again = input("Do you want to play again? (yes/no): ")
     if play_again.lower() != "yes":
-        print("You won " + str(W) + " times "+"You lost "+str(L)+" times "+"You drew "+str(D)+" times")
+        print(f"You won {W} times, You lost {L} times, You drew {D} times")
         break
