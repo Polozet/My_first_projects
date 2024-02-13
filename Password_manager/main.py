@@ -35,11 +35,16 @@ def is_3_let(s):
 
 
 def less_5_dig(s):
-    return len(s) < 5
+    numbers_count = sum(char.isdigit() for char in s)
+    return numbers_count < 6
 
 
 def less_12_dig(s):
     return len(s) < 12
+
+
+def is_4_dig(s):
+    return len(s) >= 4
 
 
 while True:
@@ -59,14 +64,17 @@ while True:
             print("Account name must contain at least 3 letters")
             continue
         elif not less_5_dig(new_psw_account):
-            print("Account name must contain less than 5 numbers")
+            print("Account name must contain less than 6 numbers")
             continue
         new_psw = input("What is the password for the account?: ")
-        if not less_12_dig(new_psw):
-            print("Invalid password, use less than 12 numbers")
-            continue
         if not new_psw.isdigit():
             print("Invalid password, only use numbers")
+            continue
+        if not is_4_dig(new_psw):
+            print("Invalid password, use at least 4 numbers")
+            continue
+        if not less_12_dig(new_psw):
+            print("Invalid password, use less than 12 numbers")
             continue
         psw_list[new_psw_account] = new_psw
         save_passwords(psw_list)
